@@ -41,7 +41,7 @@ Note: (Code snippets taken from Udacity SD course)
 
 The code for this step is contained in the first 12 code cells of the IPython notebook (vehicle-detection.ipnyb). 
 
-I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
+I started by reading in all the [`vehicle`](https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/vehicles.zip) and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
 ![alt text][image1]
 ![alt text][image10]
