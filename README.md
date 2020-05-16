@@ -58,7 +58,7 @@ I tried various combinations of parameters using the grid search and found that 
 Hist bins and color spacial bins are not that useful features. Increasing number of orientations add to more computation and it then takes more time to create the video. 
 Not that 2nd (last channel - V) gives NaN output when getting the HOG output if the image is from 0-1. So, I had to scale the image to 0-255 to deal with this issue.
 
-#### 3. Training lassifier using the selected HOG features
+#### 3. Training classifier using the selected HOG features
 
 I trained a linear SVM. The features were normalized using standard scaler from sklearn. The data was randomly shuffled and splitted into training and test sets 1/5 ratio. The code is in the 16th cell of the ipython notebook
 
