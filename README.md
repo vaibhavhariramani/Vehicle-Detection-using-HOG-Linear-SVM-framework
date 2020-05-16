@@ -5,7 +5,7 @@ The files in this repo form a general framework for training and utilizing a HOG
 
 ![final_video_screencap](https://github.com/vaibhavhariaramani/hog--svm-vehicle-detector-and-Object-Detection/blob/master/images/final_bounding_boxes.png)
 
-[Click here to watch the final video](https://youtu.be/HsH_-zP4vfQ) with bounding boxes drawn around detected cars.
+[Click here to watch the final video](https://youtu.be/rV89KM6izi8) with bounding boxes drawn around detected cars.
 
 **﻿Here are links to the labeled data for [vehicle](https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/vehicles.zip) and [non-vehicle](https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/non-vehicles.zip) examples to train your classifier.**
 
@@ -115,7 +115,7 @@ To fix this situation we’ll need to apply Non-Maximum Suppression (NMS), also 
 ### Video Implementation
 
 #### 1. Video Output
-Here's a [link to my video result][video1]
+Here's a [link to my video result][https://youtu.be/rV89KM6izi8]
 
 
 #### 2. Filters to remove false positive and combining rectangles
