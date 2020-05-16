@@ -39,7 +39,7 @@ Note: (Code snippets taken from Udacity SD course)
 
 #### 1. Extracting HOG features from the training images.
 
-The code for this step is contained in the first 12 code cells of the IPython notebook (vehicle_detection.ipnyb). 
+The code for this step is contained in the first 12 code cells of the IPython notebook (vehicle-detection.ipnyb). 
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
