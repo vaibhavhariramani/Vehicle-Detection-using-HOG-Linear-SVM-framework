@@ -13,9 +13,9 @@ The files in this repo form a general framework for training and utilizing a HOG
 The goals / steps of this project are the following:
 
 * Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier
-* Apply a color transform and append binned color features, as well as histograms of color, to your HOG feature vector. 
-* for those first two steps normalize your features and randomize a selection for training and testing.
-* Implement a sliding-window technique and use your trained classifier to search for vehicles in images.
+* Extract features from labeled (positive and negative) sample data, split into training, cross-validation, and test sets. Train classifier.
+* For feature extraction, convert images to the desired color space, select the desired channels, then extract HOG, color histogram, and/or spatial features.
+* Detect and draw bounding boxes around objects in a video using a sliding window and smoothed heatmap.
 * Run the pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
 * Estimate a bounding box for vehicles detected.
 
@@ -58,7 +58,7 @@ I tried various combinations of parameters using the grid search and found that 
 Hist bins and color spacial bins are not that useful features. Increasing number of orientations add to more computation and it then takes more time to create the video. 
 Not that 2nd (last channel - V) gives NaN output when getting the HOG output if the image is from 0-1. So, I had to scale the image to 0-255 to deal with this issue.
 
-#### 3. Training classifier using the selected HOG features
+#### 3. Training classifier using the selected HOG features & Sliding Window Search
 
 I trained a linear SVM. The features were normalized using standard scaler from sklearn. The data was randomly shuffled and splitted into training and test sets 1/5 ratio. The code is in the 16th cell of the ipython notebook
 
@@ -70,6 +70,7 @@ I decided to search with small windows size in around the center of the image an
 
 ![alt text][image3]
 
+### Heatmap Detection
 Here is the heatmap for the test images
 
 ![alt text][image5]
@@ -79,7 +80,38 @@ And the bounding boxes after thresholding looks like this:
 ![alt text][image7]
 
 ---
+## Methods
 
+### Feature extraction and SVM training
+
+Positive and negative sample data came from the [Udacity dataset](https://github.com/udacity/CarND-Vehicle-Detection), which contained 8799 images of vehicles viewed from different angles and 8971 images of non-vehicles (road, highway guardrails, etc.), all cropped and resized to 64x64 pixels. HOG, color histogram, and/or spatial features were extracted for each sample image. I experimented with a variety of color spaces (BGR, grayscale, HLS, HSV, Lab, Luv, YCrCb, YUV) and channels (any combination of 0, 1, 2) and HOG parameters (number of bins, cell size, block size, signed vs unsigned gradients). I tried both the scikit-image and OpenCV HOG implementations; the OpenCV function was roughly 5X faster than its scikit-image counterpart. I also experimented with varying numbers of color histogram bins and spatial feature sizes. Examples of a vehicle image and non-vehicle image are shown below alongside visualizations of their HOG gradient histograms.
+
+![HOG_visualization](https://github.com/vaibhavhariaramani/hog--svm-vehicle-detector-and-Object-Detection/blob/master/images/hog_visualization.png)
+
+After feature extraction, the feature vectors were scaled via `sklearn.preprocessing.StandardScaler`.
+
+Finally, the sets of feature vectors were shuffled, then divided 75%/20%/5% into training, cross-validation, and test sets. I originally tried a 70%/20%/10% split but found that the classifier's performance on the test set (frequently >99%) was not necessarily indicative of its real-world effectiveness. Consequently, I chose to reduce the size of the test set.
+
+The classifier itself was a `sklearn.svm.LinearSVC`. A number of parameters were tried for the SVC, including penalty, loss function, and regularization parameter. The training set was augmented with misclassifications from the cross-validation set and the classifier was retrained on this augmented training set before being evaluated on the test set, on which high accuracy (>99%) was frequently achieved.
+
+### Object detection
+
+A variable-size sliding window search was performed on each frame of the input video. Originally, I tried a fixed-size sliding window with an image pyramid to find objects at different scales, but this resulted in a relatively large number of false positives. Only the portion of the image below the horizon was searched to reduce computation and false positives (since there should be no vehicles above the horizon). An example of the variable-size sliding window can be seen below (as well as a link to a video of the technique).
+
+![sliding_window](https://github.com/vaibhavhariaramani/hog--svm-vehicle-detector-and-Object-Detection/blob/master/images/sliding_window_example.png)
+[Link to sliding window example video](https://youtu.be/9s7dUlmLVk4)
+
+The rationale behind this sliding window approach is that vehicles in the vicinity of the horizon will appear smaller since they're farther away, while vehicles near the bottom of the image are closer and appear larger.
+
+Due to window overlap, a single vehicle generally produced multiple overlapping detections:
+
+![overlapping_detections](https://github.com/vaibhavhariaramani/hog--svm-vehicle-detector-and-Object-Detection/blob/master/images/sliding_window_detections.png)
+[Link to video with raw detections drawn at each frame](https://youtu.be/RN2YW8y0qzY)
+
+To fix this situation we’ll need to apply Non-Maximum Suppression (NMS), also called Non-Maxima Suppression.
+[Link to implementation of Non-Maximum Supression (NMS) ](https://youtu.be/TfX6jtuPL0I)
+
+## Results
 ### Video Implementation
 
 #### 1. Video Output
