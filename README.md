@@ -114,7 +114,7 @@ To fix this situation we’ll need to apply Non-Maximum Suppression (NMS), also 
 ## Results
 ### Video Implementation
 
-#### 1. Video Output
+#### 1. Video  Output
 Here's a [link to my video result][https://youtu.be/rV89KM6izi8]
 
 
