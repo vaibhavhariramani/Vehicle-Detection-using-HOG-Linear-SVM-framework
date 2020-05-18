@@ -140,7 +140,7 @@ To learn more about these Resources you can Refer to some of these articles writ
 
 https://sites.google.com/view/geeky-traveller/computer-vision/histogram-of-oriented-gradients-and-object-detection
 
-### Made with ❤️by Vaibhav Hariramani
+### Made with ❤️ by Vaibhav Hariramani
 #### About me
 
 I am an Actions on Google, Internet of things, Alexa Skills, and Image processing developer.
