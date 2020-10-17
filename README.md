@@ -134,6 +134,13 @@ Here's an example result showing the heatmap from a series of frames of video, t
 ![alt text][image8]
 
 ---
+
+[Link to video with raw detections drawn at each frame](https://youtu.be/RN2YW8y0qzY)
+
+To fix this situation we’ll need to apply Non-Maximum Suppression (NMS), also called Non-Maxima Suppression.
+[Link to implementation of Non-Maximum Supression (NMS) ](https://github.com/vaibhavhariaramani/Non-Maximum-Suppression-for-Object-Detection-in-Python)
+
+---
 # Resources 
 
 To learn more about these Resources you can Refer to some of these articles written by Me:-
