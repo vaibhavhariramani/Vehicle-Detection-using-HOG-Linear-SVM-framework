@@ -109,6 +109,7 @@ Due to window overlap, a single vehicle generally produced multiple overlapping 
 [Link to video with raw detections drawn at each frame](https://youtu.be/RN2YW8y0qzY)
 
 To fix this situation we’ll need to apply Non-Maximum Suppression (NMS), also called Non-Maxima Suppression.
+[Link to github repo of Non-Maximum Supression (NMS) ](https://github.com/vaibhavhariaramani/Non-Maximum-Suppression-for-Object-Detection-in-Python)
 [Link to implementation of Non-Maximum Supression (NMS) ](https://youtu.be/TfX6jtuPL0I)
 
 ## Results
